@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LuckyJet Predictor</title>
+  <style>
+    body {
+      background-color: black;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .button {
+      width: 200px;
+      height: 50px;
+      background-color: violet;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .button:hover {
+      transform: translateY(5px);
+    }
+
+    .loader {
+      margin-top: 20px;
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+      display: none; /* Скрываем колесо изначально */
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 24px;
+      color: white;
+      display: none; /* Скрываем результат изначально */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://luckyjetonline.com/wp-content/uploads/2023/03/lj_logo.webp" alt="LuckyJet Logo">
+    <button class="button" onclick="startPrediction()">Predict</button>
+    <div id="loader" class="loader"></div>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function startPrediction() {
+      var button = document.querySelector('.button');
+      var loader = document.getElementById('loader');
+      var result = document.getElementById('result');
+      button.style.display = 'none';
+      loader.style.display = 'block'; // Отображаем колесо
+      setTimeout(function() {
+        loader.style.display = 'none'; // Скрываем колесо
+        result.textContent = 'Prediction: ' + getRandomNumber(1.01, 7.99) + ' X';
+        result.style.display = 'block'; // Отображаем результат
+        button.style.display = 'block'; // Отображаем кнопку "Predict" снова
+      }, 2000);
+    }
+
+    function getRandomNumber(min, max) {
+      return (Math.random() * (max - min) + min).toFixed(2);
+    }
+  </script>
+</body>
+</html>
